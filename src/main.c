@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 16:28:48 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/09 18:45:12 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:28:57 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 #include "../include/file_checker.h"
 #include "../include/file_parser.h"
 #include "../include/vector2.h"
+#include "../include/vector3.h"
 #include "../include/drawer.h"
+#include "../include/rasterisation.h"
 #include <stdio.h>
 
 typedef	struct	s_window
 {
-	void 	*mlx_ptr;
-	void 	*win_ptr;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }				t_window;
 
-int		mouse_test(int button, int x, int y, void *param)
+int		mouse_test(int x, int y, void *param)
 {
 	static		t_vector2 *start;
 	static		t_vector2 *end;
@@ -52,7 +54,6 @@ int		mouse_test(int button, int x, int y, void *param)
 		end->y = y;
 		draw_line(*start, *end, win->win_ptr, win->mlx_ptr);
 	}
-	printf("button : %d, x : %d, y : %d\n", button, x, y);
 	return (0);
 }
 
@@ -60,6 +61,7 @@ int		main(int argc, char const *argv[])
 {
 	t_grid		*grid;
 	t_window	*window;
+	t_vector3	*testVector;
 
 	if (argc != 4)
 		return (0);
@@ -70,6 +72,8 @@ int		main(int argc, char const *argv[])
 				ft_atoi(argv[3]), grid->grid_name);
 	free_grid(&grid);
 	mlx_mouse_hook(window->win_ptr, mouse_test, window);
+	testVector = new_vector3(3, 1, 2);
+	model_to_world(grid);
 	mlx_loop(window->mlx_ptr);
 	return (0);
 }

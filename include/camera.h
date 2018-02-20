@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawer.h                                           :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/09 17:09:24 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/19 17:10:49 by vboissel         ###   ########.fr       */
+/*   Created: 2018/02/19 17:32:28 by vboissel          #+#    #+#             */
+/*   Updated: 2018/02/20 17:21:52 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAWER_H
-# define DRAWER_H
+#ifndef CAMERA_H
+# define CAMERA_H
 
-# include "../libft/libft.h"
-# include "vector2.h"
 # include <math.h>
-# include "mlx.h"
+# include "drawer.h"
+# include "vector3.h"
+# include "vector2.h"
 
-void	draw_line(t_vector2 start, t_vector2 end, void *win_ptr, void *mlx_ptr);
+typedef enum	e_type_cam
+{
+	parallel,
+	conic,
+	isometric
+}				t_type_cam;
+
+typedef struct	s_camera
+{
+	t_vector3	*pos;
+	t_vector3	*rot;
+	t_type_cam	type;
+}				t_camera;
+
+t_camera		*create_cam(t_vector3 pos, t_vector3 rot, int type_cam);
 
 #endif

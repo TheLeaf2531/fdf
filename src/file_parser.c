@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:46:53 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/09 16:07:39 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:29:38 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static	int		get_width(const char *str_filename)
 		free(line);
 	}
 	close(fd);
-	return (width);
+	return (width + 1);
 }
 
 t_grid			*file_parser(const char *str)
@@ -59,6 +59,7 @@ t_grid			*file_parser(const char *str)
 	fd = open(str, O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
+		printf("%lu\n", i_row);
 		add_row(&grid, i_row, line);
 		i_row += 1;
 		free(line);

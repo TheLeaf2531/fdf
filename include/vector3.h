@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawer.h                                           :+:      :+:    :+:   */
+/*   vector3.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/09 17:09:24 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/19 17:10:49 by vboissel         ###   ########.fr       */
+/*   Created: 2018/02/10 16:57:16 by vboissel          #+#    #+#             */
+/*   Updated: 2018/02/20 18:18:45 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAWER_H
-# define DRAWER_H
+#ifndef VECTOR3_H
+# define VECTOR3_H
 
 # include "../libft/libft.h"
-# include "vector2.h"
 # include <math.h>
-# include "mlx.h"
+# include <stdio.h>
 
-void	draw_line(t_vector2 start, t_vector2 end, void *win_ptr, void *mlx_ptr);
+typedef	struct	s_vector3
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_vector3;
+
+t_vector3		*new_vector3(float x, float y, float z);
+void			to_zero(t_vector3 *vector);
+void			set_vector3(t_vector3 *vector, float x, float y, float z);
+void 			normalize(t_vector3 *vector);
 
 #endif
