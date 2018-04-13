@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawer.h                                           :+:      :+:    :+:   */
+/*   vector3.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/09 17:09:24 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/19 17:10:49 by vboissel         ###   ########.fr       */
+/*   Created: 2018/04/11 17:10:31 by vboissel          #+#    #+#             */
+/*   Updated: 2018/04/13 20:13:08 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAWER_H
-# define DRAWER_H
+#ifndef VECTOR3_H
+# define VECTOR3_H
 
-# include "../libft/libft.h"
-# include "vector2.h"
 # include <math.h>
-# include "mlx.h"
+# include "matrix4x4.h"
 
-void	draw_line(t_vector2 start, t_vector2 end, void *win_ptr, void *mlx_ptr);
+typedef struct	s_vector3
+{
+	double x;
+	double y;
+	double z;
+	double w;
+}				t_vector3;
+
+t_vector3		*new_vector3(double x, double y, double z);
+double			magnitude(t_vector3 vector);
+void			normalize(t_vector3 *vector);
+t_vector3		*multiply_v3_m4x4(t_vector3 **v, t_matrix4x4 *m);
 
 #endif

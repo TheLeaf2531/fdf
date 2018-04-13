@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   ft_fchar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/19 17:43:53 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/20 17:22:12 by vboissel         ###   ########.fr       */
+/*   Created: 2018/03/27 16:13:28 by vboissel          #+#    #+#             */
+/*   Updated: 2018/03/27 16:15:42 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/camera.h"
+#include "libft.h"
 
-t_camera		*create_cam(t_vector3 pos, t_vector3 rot, int type_cam)
+int		ft_fchar(char c, char *str)
 {
-	t_camera	*camera;
+	size_t i;
 
-	camera = malloc(sizeof(camera));
-	camera->pos = new_vector3(pos.x, pos.y, pos.z);
-	camera->rot = new_vector3(rot.x, rot.y, rot.z);
-	camera->type = type_cam;
-	return (camera);
+	i = 0;
+	while (str[i] != 0)
+	{
+		if (str[i] == c)
+			return (1);
+		i += 1;
+	}
+	return (0);
 }

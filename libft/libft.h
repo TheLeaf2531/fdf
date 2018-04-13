@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 18:15:17 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/08 16:43:51 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/04/03 17:18:10 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 128
-
-typedef	struct	s_file
-{
-	int		fd;
-	char	*c_line;
-	char	*n_lines;
-}				t_file;
 
 typedef struct	s_list
 {
@@ -108,8 +101,10 @@ t_list			*ft_strsplitlst(char const *s, char c);
 size_t			ft_strlenc(const char *str, char c);
 void			ft_lstrem(t_list **prev, t_list **to_del);
 size_t			ft_lstsrchi(t_list **lst, char *s);
-int				get_next_line(const int fd, char **line);
 size_t			ft_striterc(char *s, int (*f)(int));
 size_t			ft_strsplitcnt(char const *s, char c);
+char			*ft_strncatf(char *s1, char*s2);
+int				ft_fchar(char c, char *str);
+int				get_next_line(const int fd, char **line);
 
 #endif

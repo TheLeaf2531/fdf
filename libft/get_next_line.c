@@ -5,119 +5,105 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/15 17:31:22 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/07 16:16:24 by vboissel         ###   ########.fr       */
+/*   Created: 2018/02/24 18:44:57 by vboissel          #+#    #+#             */
+/*   Updated: 2018/04/03 17:18:49 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_file(t_file **file)
+void		remove_lst(t_list **lst, t_list **current)
 {
-	if (*file)
+	size_t	lst_size;
+	size_t	i;
+
+	i = 0;
+	if ((*lst)->content_size == (*current)->content_size)
+		*lst = (*current)->next;
+	else
 	{
-		free((*file)->c_line);
-		free((*file)->n_lines);
-		free(*file);
-		*file = NULL;
-	}
-	file = NULL;
-}
-
-int		prelim_checks(const int fd, t_file **file, char **line)
-{
-	if (fd < 0)
-		return (-1);
-	if (&(*line) == 0)
-		return (-1);
-	if (*file && fd != (*file)->fd)
-		free_file(&(*file));
-	if (!(*file))
-	{
-		if (((*file) = malloc(sizeof(t_file))) == NULL)
-			return (-1);
-		(*file)->c_line = ft_strnew(0);
-		(*file)->n_lines = ft_strnew(0);
-		(*file)->fd = fd;
-	}
-	return (0);
-}
-
-int		fill_file(t_file **file, char *buf)
-{
-	char	*tmp_str;
-
-	if ((tmp_str = ft_strjoin((*file)->n_lines, buf)) == NULL)
-		return (-1);
-	if (ft_strlenc(tmp_str, '\n') == ft_strlen(tmp_str) && ft_strlen(buf) != 0)
-	{
-		free((*file)->n_lines);
-		if (((*file)->n_lines = ft_strdup(tmp_str)) == NULL)
-			return (-1);
-		free(tmp_str);
-		return (1);
-	}
-	free((*file)->c_line);
-	free((*file)->n_lines);
-	(*file)->c_line = ft_strsub(tmp_str, 0, ft_strlenc(tmp_str, '\n'));
-	(*file)->n_lines = ft_strsub(tmp_str, ft_strlenc(tmp_str, '\n') + 1,
-	ft_strlen(tmp_str));
-	free(tmp_str);
-	if (!(*file)->c_line || !(*file)->n_lines)
-		return (-1);
-	return (0);
-}
-
-int		read_file(t_file **file)
-{
-	char	buf[BUFF_SIZE + 1];
-	long	ret;
-
-	ft_bzero(buf, BUFF_SIZE + 1);
-	ret = read((*file)->fd, buf, BUFF_SIZE);
-	if (ret < 0)
-		return (-1);
-	if (ret > 0)
-	{
-		while (fill_file(&(*file), buf) != 0)
+		lst_size = ft_lstlen(lst);
+		while (i <= lst_size)
 		{
-			ft_bzero(buf, BUFF_SIZE + 1);
-			ret = read((*file)->fd, buf, BUFF_SIZE);
+			if (ft_lstget(lst, i)->content_size == (*current)->content_size)
+			{
+				ft_lstget(lst, i - 1)->next = (*current)->next;
+			}
+			i++;
 		}
-		return (1);
 	}
-	if (ft_strlen((*file)->n_lines) > 0)
-	{
-		fill_file(&(*file), buf);
-		return (1);
-	}
-	return (0);
+	ft_memdel((void**)&(*current));
 }
 
-int		get_next_line(const int fd, char **line)
+t_list		*get_lst_fd(int fd, t_list **lst)
 {
-	static t_file	*file;
-	int				res;
+	t_list *current_file;
+	size_t i;
 
-	if (prelim_checks(fd, &file, line))
+	if (*lst != NULL)
 	{
-		free_file(&file);
+		i = 0;
+		while (i <= ft_lstlen(lst))
+		{
+			if (ft_lstget(lst, i)->content_size == (size_t)fd)
+				return (ft_lstget(lst, i));
+			i++;
+		}
+	}
+	current_file = malloc(sizeof(t_list));
+	if (current_file == NULL)
+		return (NULL);
+	current_file->content_size = fd;
+	current_file->content = ft_strnew(0);
+	current_file->next = NULL;
+	if (*lst == NULL)
+		*lst = current_file;
+	else
+		ft_lstadd(lst, current_file);
+	return (current_file);
+}
+
+int			get_line(t_list **current_file, char **line, int fd)
+{
+	char	*buf;
+	char	*tmp;
+	int		ret;
+
+	buf = ft_strnew(BUFF_SIZE);
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	{
+		(*current_file)->content = ft_strncatf((*current_file)->content, buf);
+		if (ft_fchar('\n', (*current_file)->content))
+			break ;
+		buf = ft_strnew(BUFF_SIZE);
+	}
+	if (ret >= 0 && ft_strlen((*current_file)->content) > 0)
+	{
+		*line = ft_strnew(ft_strlenc((*current_file)->content, '\n'));
+		*line = ft_strncpy(*line, (*current_file)->content,
+					ft_strlenc((*current_file)->content, '\n'));
+		tmp = ft_strsub((*current_file)->content,
+				ft_strlenc((*current_file)->content, '\n') + 1,
+				ft_strlen((*current_file)->content));
+		ft_memdel(&(*current_file)->content);
+		(*current_file)->content = tmp;
+		ret = 1;
+	}
+	return (ret);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static t_list	*files;
+	t_list			*current_file;
+	int				ret;
+
+	if (fd < 0 || line == 0)
 		return (-1);
-	}
-	res = read_file(&file);
-	if (res == -1)
-	{
-		free_file(&file);
-		*line = ft_strnew(0);
+	current_file = get_lst_fd(fd, &files);
+	if (current_file == NULL)
 		return (-1);
-	}
-	if (res == 1)
-	{
-		*line = ft_strdup(file->c_line);
-		if (ft_strlen(file->n_lines) == 0)
-			free_file(&file);
-		return (1);
-	}
-	free_file(&file);
-	return (0);
+	if ((ret = get_line(&current_file, line, fd)) <= 0)
+		remove_lst(&files, &current_file);
+	return (ret);
 }

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_parser.h                                      :+:      :+:    :+:   */
+/*   ft_strncatf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 19:12:03 by vboissel          #+#    #+#             */
-/*   Updated: 2018/02/09 15:22:57 by vboissel         ###   ########.fr       */
+/*   Created: 2018/02/24 19:09:36 by vboissel          #+#    #+#             */
+/*   Updated: 2018/02/24 19:10:16 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILE_PARSER_H
-# define FILE_PARSER_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include "grid.h"
-# include <stdio.h>
+char	*ft_strncatf(char *s1, char *s2)
+{
+	size_t	size;
+	char	*str;
 
-t_grid		*file_parser(const char	*str_filename);
-
-#endif
+	size = ft_strlen(s1) + ft_strlen(s2);
+	str = ft_strnew(size);
+	str = ft_strncat(str, s1, size);
+	str = ft_strncat(str, s2, size);
+	free(s1);
+	free(s2);
+	return (str);
+}

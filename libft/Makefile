@@ -6,11 +6,11 @@
 #    By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 18:22:57 by vboissel          #+#    #+#              #
-#    Updated: 2018/02/07 17:09:04 by vboissel         ###   ########.fr        #
+#    Updated: 2018/03/29 17:48:28 by vboissel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
 SRC = $(wildcard *.c)
@@ -23,9 +23,9 @@ GCH = $(wildcard *.gch)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(INC)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	$(CC) $(CFLAGS) -c $(SRC) -I $(INC)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 %.o: %.c
 	@$(CC) -o $@ -c $< $(CFLAGS)

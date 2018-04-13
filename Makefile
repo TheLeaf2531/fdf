@@ -6,7 +6,7 @@
 #    By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:11:05 by vboissel          #+#    #+#              #
-#    Updated: 2018/02/08 16:18:55 by vboissel         ###   ########.fr        #
+#    Updated: 2018/04/03 17:39:50 by vboissel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INC_MLX = /usr/local/include
 all : $(NAME)
 
 $(NAME): $(SRC) $(INC)
-	@(cd $(LIBFT_DIR) && $(MAKE))
+	@$(MAKE) -C $(LIBFT_DIR)
 	@$(CC) $(CFLAGS) -I $(INC_MLX) $(LIBFT) $(SRC) $(INC) $(FLAGSMLIB)
 	@mv a.out $(NAME)
 
