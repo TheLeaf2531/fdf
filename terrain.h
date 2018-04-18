@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   terrain.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 20:08:33 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/16 17:07:25 by vboissel         ###   ########.fr       */
+/*   Created: 2018/04/16 17:01:47 by vboissel          #+#    #+#             */
+/*   Updated: 2018/04/18 19:50:01 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef TERRAIN_H
+# define TERRAIN_H
 
-# include "libft/libft.h"
-# include "vector3.h"
 # include "triangle.h"
-# include "terrain.h"
 
-t_terrain	*parse_file(char *file_name);
+typedef struct	s_terrain
+{
+	int			width;
+	int			height;
+	t_triangle	**triangles;
+	size_t		size;
+}				t_terrain;
+
+t_terrain *create_terrain(int width, int height);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 18:00:38 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/13 20:14:33 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/04/16 20:01:33 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	print_vector3(t_vector3 v)
 {
-	printf("\n[%f]\n[%f]\n[%f]\n[%f]\n", v.x, v.y, v.z, v.w);
+	//printf("\n[%f]\n[%f]\n[%f]\n[%f]\n", v.x, v.y, v.z, v.w);
+	printf("\n[%f]\n[%f]\n[%f]\n", v.x, v.y, v.z);
 }
 
 void	print_matrix4x4(t_matrix4x4 m)

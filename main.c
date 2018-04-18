@@ -6,11 +6,12 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:09:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/13 20:54:44 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:57:57 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector3.h"
+#include "terrain.h"
 #include "matrix4x4.h"
 #include "printer.h"
 #include "parser.h"
@@ -19,10 +20,14 @@ int     main(int argc, char **argv)
 {
 	t_vector3 *vector;
 	t_matrix4x4 *matrix_0;
+	t_terrain	*terrain;
+	size_t		i;
+
     (void)argc;
     (void)argv;
 	vector = new_vector3(0, 2 ,3);
-	print_vector3(*vector);
+	i = 0;
+	//print_vector3(*vector);
 	matrix_0 = malloc(sizeof(t_matrix4x4));
 	matrix_0->t[0][0] = 1;
 	matrix_0->t[0][1] = 0;
@@ -40,10 +45,34 @@ int     main(int argc, char **argv)
 	matrix_0->t[3][1] = 0;
 	matrix_0->t[3][2] = 0;
 	matrix_0->t[3][3] = 1;
-	print_matrix4x4(*matrix_0);
-	vector = multiply_v3_m4x4(&vector, matrix_0);
-	print_vector3(*vector);
-	//print_matrix4x4(*matrix_0); 	
-	parse_file(argv[1]);
+	//print_matrix4x4(*matrix_0);
+	//vector = multiply_v3_m4x4(&vector, matrix_0);
+	//print_vector3(*vector);
+	//print_matrix4x4(*matrix_0);
+	printf("Start parsing\n");
+	terrain = parse_file(argv[1]);
+	if(terrain == NULL)
+		return (-1);
+	printf ("Terrain width : %d\n", terrain->width);
+	printf ("Terrain height : %d\n", terrain->height);
+	while (i < terrain->size)
+	{
+		printf("------- TRIANGLE %zu -------\n", i);
+		printf("p0 : (%f, %f, %f)\n",
+			terrain->triangles[i]->p0->x,
+			terrain->triangles[i]->p0->y,
+			terrain->triangles[i]->p0->z);
+		printf("p1 : (%f, %f, %f)\n",
+			terrain->triangles[i]->p1->x,
+			terrain->triangles[i]->p1->y,
+			terrain->triangles[i]->p1->z);
+		printf("p2 : (%f, %f, %f)\n",
+			terrain->triangles[i]->p2->x,
+			terrain->triangles[i]->p2->y,
+			terrain->triangles[i]->p2->z);
+		i++;
+	}
+	while (1)
+		;	
     return (0);
 }
