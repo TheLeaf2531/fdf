@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 17:09:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/18 19:57:57 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/04/28 16:43:19 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,5 @@ int     main(int argc, char **argv)
 			terrain->triangles[i]->p2->z);
 		i++;
 	}
-	while (1)
-		;	
     return (0);
 }
