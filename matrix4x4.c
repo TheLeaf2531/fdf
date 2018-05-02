@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 17:41:05 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/13 20:16:10 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:19:32 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,30 @@ t_matrix4x4		*multiply_m4x4(t_matrix4x4 *a, t_matrix4x4 *b)
 		i_1 = i_1 == 3 ? 0 : i_1;
 	}
 	return (c);
+}
+
+t_matrix4x4		*identity_m4x4()
+{
+	t_matrix4x4 *identity;
+
+	identity = ft_memalloc(sizeof(t_matrix4x4));
+	if (identity == NULL)
+		return (NULL);
+	identity->t[0][0] = 1;
+	identity->t[0][1] = 0;
+	identity->t[0][2] = 0;
+	identity->t[0][3] = 0;
+	identity->t[1][0] = 0;
+	identity->t[1][1] = 1;
+	identity->t[1][2] = 0;
+	identity->t[1][3] = 0; 
+	identity->t[2][0] = 0;
+	identity->t[2][1] = 0;
+	identity->t[2][2] = 1;
+	identity->t[2][3] = 0;
+	identity->t[3][0] = 0;
+	identity->t[3][1] = 0;
+	identity->t[3][2] = 0;
+	identity->t[3][3] = 1;
+	return (identity);
 }
