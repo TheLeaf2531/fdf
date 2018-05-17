@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.h                                          :+:      :+:    :+:   */
+/*   m4_multiply.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 18:01:58 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/12 18:42:49 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/15 18:06:32 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/16 18:21:17 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTER_H
-# define PRINTER_H
-# include "matrix4x4.h"
-# include "vector3.h"
-# include "vector2.h"
-# include "libft/libft.h"
+#include "geometry.h"
 
-void	print_vector3(t_vector3 vector);
-void	print_matrix4x4(t_matrix4x4 matrix);
-void	print_vector2(t_vector2 v);
+t_matrix4		m4_multiply(t_matrix4 a, t_matrix4 b)
+{
+	t_matrix4	c;
+	int			y;
+	int			x;
 
-#endif
+	y = 0;
+	x = 0;
+	while (y < 4)
+	{
+		c.t[y][x] = a.t[y][0] * b.t[0][x] +
+					a.t[y][1] * b.t[1][x] +
+					a.t[y][2] * b.t[2][x] +
+					a.t[y][3] * b.t[3][x];
+		y = x == 3 ? y + 1 : y;
+		x = x == 3 ? 0 : x + 1;
+	}
+	return (c);
+}

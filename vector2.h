@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   vector2.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 17:38:57 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/28 17:54:41 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/12 18:33:20 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/17 17:02:19 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
+#ifndef VECTOR2_H
+# define VECTOR2_H
 
-t_camera	*create_camera(void)
+#include "libft/libft.h"
+
+typedef	struct	s_vector2
 {
-	t_camera	*camera;
+	int		x;
+	int		y;
+}				t_vector2;
 
-	camera = ft_memalloc(sizeof(t_camera));
-	camera->focal = FOCAL;
-	camera->z_near = NEAR_CLIPPING_PLANE;
-	camera->z_far = FAR_CLIPPING_PLANE;
-	camera->fov = FOV;
-	return (camera);
-}
+t_vector2		*new_vector2(int x, int y);
+
+#endif

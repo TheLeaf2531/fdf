@@ -1,6 +1,7 @@
 {
 	"C_Cpp.intelliSenseEngineFallback": "Disabled",
 	"files.associations": {
-		"matrix4x4.h": "c"
+		"matrix4x4.h": "c",
+		"geometry.h": "c"
 	}
 }

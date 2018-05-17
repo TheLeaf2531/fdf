@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.h                                          :+:      :+:    :+:   */
+/*   m4_swap_row.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 18:01:58 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/12 18:42:49 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/15 19:39:34 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/16 18:20:14 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTER_H
-# define PRINTER_H
-# include "matrix4x4.h"
-# include "vector3.h"
-# include "vector2.h"
-# include "libft/libft.h"
+#include "geometry.h"
 
-void	print_vector3(t_vector3 vector);
-void	print_matrix4x4(t_matrix4x4 matrix);
-void	print_vector2(t_vector2 v);
+t_matrix4		m4_swap_row(t_matrix4 m, int r1, int r2)
+{
+	t_matrix4	temp;
+	int			x;
 
-#endif
+	temp = m;
+	x = 0;
+	while (x < 4)
+	{
+		temp.t[r1][x] = m.t[r2][x];
+		temp.t[r2][x] = m.t[r1][x];
+		x++;
+	}
+	return (temp);
+}

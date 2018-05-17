@@ -6,11 +6,19 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:26 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/02 19:19:12 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/12 17:16:44 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix4x4.h"
+
+void	pri(t_matrix4x4 m)
+{
+	printf("\n[%f,%f,%f,%f]\n", m.t[0][0], m.t[0][1], m.t[0][2], m.t[0][3]);
+	printf("[%f,%f,%f,%f]\n", m.t[1][0], m.t[1][1], m.t[1][2], m.t[1][3]);
+	printf("[%f,%f,%f,%f]\n", m.t[2][0], m.t[2][1], m.t[2][2], m.t[2][3]);
+	printf("[%f,%f,%f,%f]\n", m.t[3][0], m.t[3][1], m.t[3][2], m.t[3][3]);
+}
 
 t_matrix4x4		*swap_row(t_matrix4x4 *m, int r1, int r2)
 {
@@ -93,6 +101,7 @@ int				invert_1(t_matrix4x4 **m, t_matrix4x4 **inv)
 	k = -1;
 	while (++k < 4)
 	{
+		invert_1_5(m, inv);
 		i = -1;
 		pivot = (*m)->t[k][k];
 		while (++i < 4)

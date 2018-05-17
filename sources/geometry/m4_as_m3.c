@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.h                                          :+:      :+:    :+:   */
+/*   m4_as_m3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 18:01:58 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/12 18:42:49 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/17 17:32:21 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/17 17:40:48 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTER_H
-# define PRINTER_H
-# include "matrix4x4.h"
-# include "vector3.h"
-# include "vector2.h"
-# include "libft/libft.h"
+#include "geometry.h"
 
-void	print_vector3(t_vector3 vector);
-void	print_matrix4x4(t_matrix4x4 matrix);
-void	print_vector2(t_vector2 v);
-
-#endif
+t_matrix3		m4_as_m3(t_matrix4 m)
+{
+	return ((t_matrix3){
+		m.t[0][0], m.t[0][1], m.t[0][2],
+		m.t[1][0], m.t[1][1], m.t[1][2],
+		m.t[2][0], m.t[2][1], m.t[2][2]
+	});
+}

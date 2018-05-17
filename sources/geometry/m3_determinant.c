@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   m3_determinant.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 17:38:59 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/28 17:54:32 by vboissel         ###   ########.fr       */
+/*   Created: 1008/05/06 09:47:54 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/16 19:57:18 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
+#include "geometry.h"
 
-# include <math.h>
-# include "libft/libft.h"
-# include "matrix4x4.h"
-
-# define FOCAL 35
-# define INCH_TO_MM 25.4
-# define NEAR_CLIPPING_PLANE 0.1
-# define FAR_CLIPPING_PLANE 1000
-# define FOV 90
-
-typedef	struct	s_camera
+double		m3_determinant(t_matrix3 m)
 {
-	t_matrix4x4	transform;
-	float		focal;
-	float		z_near;
-	float		z_far;
-	float		fov;
-}				t_camera;
-
-t_camera	*create_camera(void);
-
-#endif
+	return ((double)m.t[0][0] * m.t[1][1] * m.t[2][2] +
+					m.t[0][1] * m.t[1][2] * m.t[2][0] +
+					m.t[0][2] * m.t[1][2] * m.t[2][1] -
+					m.t[0][0] * m.t[1][2] * m.t[2][1] -
+					m.t[0][1] * m.t[1][0] * m.t[2][2] -
+					m.t[0][2] * m.t[1][1] * m.t[2][0]);
+}

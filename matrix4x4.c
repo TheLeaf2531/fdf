@@ -6,33 +6,38 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 17:41:05 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/02 19:19:32 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/15 18:08:32 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix4x4.h"
 
-t_matrix4x4		*multiply_m4x4(t_matrix4x4 *a, t_matrix4x4 *b)
+t_matrix4x4		*multiply_m4x4(t_matrix4x4 **a, t_matrix4x4 *b)
 {
-	t_matrix4x4	*c;
+	t_matrix4x4	c;
 	int			i_0;
 	int			i_1;
 
-	c = malloc(sizeof(t_matrix4x4));
-	if (c == NULL)
-		return (NULL);
 	i_0 = 0;
 	i_1 = 0;
 	while (i_0 < 4)
 	{
-		c->t[i_0][i_1] = a->t[i_0][0] * b->t[0][i_1] +
-						a->t[i_0][1] * b->t[1][i_1] +
-						a->t[i_0][2] * b->t[2][i_1] +
-						a->t[i_0][3] * b->t[3][i_1];
-		i_0 = i_1 == 3 ? i_0 + 1 : i_1;
-		i_1 = i_1 == 3 ? 0 : i_1;
+		c.t[i_0][i_1] = (*a)->t[i_0][0] * b->t[0][i_1] +
+						(*a)->t[i_0][1] * b->t[1][i_1] +
+						(*a)->t[i_0][2] * b->t[2][i_1] +
+						(*a)->t[i_0][3] * b->t[3][i_1];
+		i_0 = i_1 == 3 ? i_0 + 1 : i_0;
+		i_1 = i_1 == 3 ? 0 : i_1 + 1;
 	}
-	return (c);
+	i_0 = 0;
+	i_1 = 0;
+	while (i_0 < 4)
+	{
+		(*a)->t[i_0][i_1] = c.t[i_0][i_1];
+		i_0 = i_1 == 3 ? i_0 + 1 : i_0;
+		i_1 = i_1 == 3 ? 0 : i_1 + 1;
+	}
+	return (*a);
 }
 
 t_matrix4x4		*identity_m4x4()

@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3.h                                          :+:      :+:    :+:   */
+/*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 17:10:31 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/15 17:09:44 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/14 16:27:16 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/14 18:32:25 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR3_H
-# define VECTOR3_H
+#ifndef TRANSFORM_H
+# define TRANSFORM_H
 
-# include <math.h>
 # include "matrix4x4.h"
+# include "vector3.h"
 
-typedef struct	s_vector3
-{
-	double x;
-	double y;
-	double z;
-	double w;
-}				t_vector3;
-
-t_vector3		*new_vector3(double x, double y, double z);
-double			magnitude(t_vector3 vector);
-void			normalize(t_vector3 *vector);
-t_vector3		*multiply_v3_m4x4(t_vector3 v, t_matrix4x4 m);
-t_vector3		*multiply_m4x4_v3(t_matrix4x4 m, t_vector3 v);
+float		convert_to_rad(float degrees);
+float		convert_to_deg(float radians);
+t_matrix4x4	*rotate_x(t_matrix4x4 **m, float angle);
+t_matrix4x4	*rotate_y(t_matrix4x4 **m, float angle);
+t_matrix4x4	*rotate_z(t_matrix4x4 **m, float angle);
 
 #endif
