@@ -6,104 +6,93 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 18:44:57 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/28 20:17:12 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/20 19:21:36 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		remove_lst(t_list **lst, t_list **current)
+static char				*ft_strndup(const char *s, size_t n)
 {
-	size_t	lst_size;
-	size_t	i;
+	unsigned int	i;
+	char			*cpy;
 
-	i = 0;
-	if ((*lst)->content_size == (*current)->content_size)
-		*lst = (*current)->next;
-	else
-	{
-		lst_size = ft_lstlen(lst);
-		while (i <= lst_size)
-		{
-			if (ft_lstget(lst, i)->content_size == (*current)->content_size)
-			{
-				ft_lstget(lst, i - 1)->next = (*current)->next;
-			}
-			i++;
-		}
-	}
-	ft_memdel((void**)&(*current));
-}
-
-t_list		*get_lst_fd(int fd, t_list **lst)
-{
-	t_list *current_file;
-	size_t i;
-
-	if (*lst != NULL)
-	{
-		i = 0;
-		while (i <= ft_lstlen(lst))
-		{
-			if (ft_lstget(lst, i)->content_size == (size_t)fd)
-				return (ft_lstget(lst, i));
-			i++;
-		}
-	}
-	current_file = malloc(sizeof(t_list));
-	if (current_file == NULL)
+	if ((cpy = (char*)malloc(sizeof(*cpy) * (n + 1))) == 0)
 		return (NULL);
-	current_file->content_size = fd;
-	current_file->content = ft_strnew(0);
-	current_file->next = NULL;
-	if (*lst == NULL)
-		*lst = current_file;
-	else
-		ft_lstadd(lst, current_file);
-	return (current_file);
+	i = 0;
+	while (*s && i < n)
+	{
+		cpy[i] = s[i];
+		i++;
+	}
+	cpy[i] = '\0';
+	return (cpy);
 }
 
-int			get_line(t_list **current_file, char **line, int fd)
+char					*read_gnl(char **gnl, char *buf, int fd)
 {
-	char	*buf;
-	char	*tmp;
-	int		ret;
+	char		*tmp;
+	int			ret;
 
-	buf = ft_strnew(BUFF_SIZE);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	ret = 1;
+	while (!(ft_strchr(*gnl, '\n')) && ret)
 	{
-		(*current_file)->content = ft_strncatf((*current_file)->content, buf);
-		if (ft_fchar('\n', (*current_file)->content))
-			break ;
-		buf = ft_strnew(BUFF_SIZE);
+		ret = read(fd, buf, BUFF_SIZE);
+		if (ret)
+		{
+			buf[ret] = '\0';
+			tmp = *gnl;
+			if (!(*gnl = ft_strjoin(*gnl, buf)))
+				return (NULL);
+			free(tmp);
+		}
 	}
-	if (ret >= 0 && ft_strlen((*current_file)->content) > 0)
-	{
-		*line = ft_strnew(ft_strlenc((*current_file)->content, '\n'));
-		*line = ft_strncpy(*line, (*current_file)->content,
-					ft_strlenc((*current_file)->content, '\n'));
-		tmp = ft_strsub((*current_file)->content,
-				ft_strlenc((*current_file)->content, '\n') + 1,
-				ft_strlen((*current_file)->content));
-		ft_memdel(&(*current_file)->content);
-		(*current_file)->content = tmp;
-		ret = 1;
-	}
-	return (ret);
+	free(buf);
+	return (*gnl);
 }
 
-int			get_next_line(const int fd, char **line)
+char					*stock_line(char **gnl)
 {
-	static t_list	*files;
-	t_list			*current_file;
-	int				ret;
+	char		*buf;
+	char		*newline;
+	char		*tmp;
 
-	if (fd < 0 || line == 0)
+	buf = ft_strchr(*gnl, '\n');
+	tmp = NULL;
+	if (buf)
+	{
+		if (!(newline = ft_strndup(*gnl, buf - *gnl)))
+			return (NULL);
+		tmp = *gnl;
+		if (!(*gnl = ft_strdup(buf + 1)))
+			return (NULL);
+		free(tmp);
+	}
+	else if (!(newline = ft_strdup(*gnl)))
+		return (NULL);
+	if (!(*gnl) || !tmp)
+	{
+		free(*gnl);
+		*gnl = NULL;
+	}
+	return (newline);
+}
+
+int						get_next_line(const int fd, char **line)
+{
+	static char	*gnl = NULL;
+	char		*buf;
+
+	if (fd < 0 || !line || BUFF_SIZE <= 0 || !(buf = ft_strnew(BUFF_SIZE + 1)) \
+		|| read(fd, buf, 0) == -1 || (gnl == NULL && !(gnl = ft_strnew(0))))
 		return (-1);
-	current_file = get_lst_fd(fd, &files);
-	if (current_file == NULL)
+	if (!(read_gnl(&gnl, buf, fd)))
 		return (-1);
-	if ((ret = get_line(&current_file, line, fd)) <= 0)
-		remove_lst(&files, &current_file);
-	return (ret);
+	if (*gnl)
+	{
+		if (!(*line = stock_line(&gnl)))
+			return (-1);
+		return (1);
+	}
+	return (0);
 }

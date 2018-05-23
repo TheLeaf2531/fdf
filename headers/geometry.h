@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:13:30 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/17 19:18:32 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:40:26 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <math.h>
 # include <stdio.h>
+
+# define PI	3.14159265359
 
 typedef	struct	s_vector2i
 {
@@ -55,6 +57,8 @@ t_vector2i		vec2i_set(int x, int y);
 t_vector3		vec3_set(double x, double y, double z);
 double			vec3_magnitude(t_vector3 v);
 t_vector3		vec3_normalize(t_vector3 vec);
+t_vector3		vec3_to_radians(t_vector3 rot);
+t_vector3		vec3_to_degrees(t_vector3 rot);
 
 t_matrix3		m3_identity(void);
 double			m3_determinant(t_matrix3 m);
@@ -67,5 +71,11 @@ double			m4_determinant(t_matrix4 m);
 t_matrix4		m4_inverse(t_matrix4 m);
 t_matrix3		m4_as_m3(t_matrix4 m);
 t_vector3		m4_multiply_v3(t_matrix4 m, t_vector3 v);
+t_matrix4		m4_euler(t_vector3 rot);
+t_matrix4		m4_translation(t_vector3 pos);
+t_matrix4		m4_invert_translation(t_vector3 pos);
+
+double			to_radians(double ang);
+double			to_degrees(double ang);
 
 #endif

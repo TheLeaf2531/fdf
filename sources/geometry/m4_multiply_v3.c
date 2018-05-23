@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 17:50:39 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/17 20:14:53 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/18 18:07:13 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector3		m4_multiply_v3(t_matrix4 m, t_vector3 v)
 		m.t[0][2] * v.x + m.t[1][2] * v.y + m.t[2][2] * v.z + m.t[3][2],
 		m.t[0][3] * v.x + m.t[1][3] * v.y + m.t[2][3] * v.z + m.t[3][3]
 	};
-	return((t_vector3){
+	return ((t_vector3){
 		v_m.x / v_m.w,
 		v_m.y / v_m.w,
 		v_m.z / v_m.w,

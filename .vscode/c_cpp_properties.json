@@ -10,7 +10,8 @@
                 "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
                 "/usr/include",
                 ".",
-                "${workspaceFolder}/headers"
+                "${workspaceFolder}/headers",
+                "${workspaceFolder}/libft"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",

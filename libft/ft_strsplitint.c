@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:46:26 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/18 17:36:20 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/20 19:31:38 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		*ft_strsplitint(char *str, int c)
 {
 	char	**str_tab;
-	int 	*tab;
+	int		*tab;
 	size_t	size;
 	size_t	i;
 
