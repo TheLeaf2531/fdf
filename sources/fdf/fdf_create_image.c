@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_new_image.c                                    :+:      :+:    :+:   */
+/*   fdf_create_image.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 18:10:21 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/21 18:19:16 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/25 18:29:05 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/26 17:33:20 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_image			*fdf_new_image(t_window *window, int width, int height)
+t_image			*fdf_create_image(t_window *window)
 {
 	t_image	*image;
 
 	if ((image = ft_memalloc(sizeof(t_image))) == NULL)
 		return (NULL);
-	if (!(image->img_ptr = mlx_new_image(window->mlx_ptr, width, height)))
+	if (!(image->img_ptr = mlx_new_image(window->mlx_ptr, WIDTH, HEIGHT)))
 		return (NULL);
 	if ((image->img = (unsigned int *)mlx_get_data_addr(
 			image->img_ptr,
@@ -27,7 +27,5 @@ t_image			*fdf_new_image(t_window *window, int width, int height)
 			&image->endian
 	)) == NULL)
 		return (NULL);
-	image->width = width;
-	image->height = height;
 	return (image);
 }

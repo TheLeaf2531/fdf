@@ -6,17 +6,17 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:30:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/23 17:36:12 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:57:35 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fdf_draw_line(t_image *img, t_vector2i start,
-						t_vector2i end, unsigned int color)
+void	fdf_draw_line(t_image *img, t_vector2l start,
+						t_vector2l end, unsigned int color)
 {
-	t_vector2i	s;
-	t_vector2i	d;
+	t_vector2l	s;
+	t_vector2l	d;
 	int			err;
 	int			err_2;
 

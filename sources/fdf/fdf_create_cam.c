@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_put_pixel.c                                    :+:      :+:    :+:   */
+/*   fdf_create_cam.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 18:24:24 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/25 18:44:54 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/24 18:13:33 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/26 19:13:48 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-void			fdf_put_pixel(t_image *image, unsigned int color, int x, int y)
+t_camera	*fdf_create_camera()
 {
-	if (y * HEIGHT + x > HEIGHT * WIDTH)
-		return ;
-	image->img[y * HEIGHT + x] = color;
+	t_camera	*camera;
+
+	if ((camera = ft_memalloc(sizeof(t_camera))) == NULL)
+		return (NULL);
+	camera->position = vec3_set(-10, -10, -10);
+	camera->rotation = vec3_set(0, 0, 0);
+	camera->cam_ratio = WIDTH / HEIGHT;
+	return (camera); 
 }

@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 18:14:22 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/20 21:18:05 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:54:18 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 # include "geometry.h"
-# include "fdf.h"
+# include "fdf_types.h"
 
 typedef	struct	s_fdf_file
 {

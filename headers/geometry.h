@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:13:30 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/23 17:40:26 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:53:32 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef	struct	s_vector2i
 	int		x;
 	int		y;
 }				t_vector2i;
+
+typedef	struct	s_vector2l
+{
+	int		x;
+	int		y;
+}				t_vector2l;
 
 typedef	struct	s_vector2
 {
@@ -53,6 +59,7 @@ void			v3_printl(t_vector3 v);
 
 t_vector2		vec2_set(double x, double y);
 t_vector2i		vec2i_set(int x, int y);
+t_vector2l		vec2l_set(long x, long y);
 
 t_vector3		vec3_set(double x, double y, double z);
 double			vec3_magnitude(t_vector3 v);
