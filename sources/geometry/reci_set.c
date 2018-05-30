@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_create_cam.c                                   :+:      :+:    :+:   */
+/*   reci_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 18:13:33 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/29 15:34:56 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/27 20:40:16 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/27 20:44:05 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "geometry.h"
 
-t_camera	*fdf_create_camera()
+t_rectanglei reci_set(int minx, int miny, int maxx, int maxy)
 {
-	t_camera	*camera;
-
-	if ((camera = ft_memalloc(sizeof(t_camera))) == NULL)
-		return (NULL);
-	camera->position = vec3_set(0, 0, 0);
-	camera->rotation = vec3_set(0, 0, 0);
-	camera->cam_ratio = WIDTH / HEIGHT;
-	return (camera); 
+    return ((t_rectanglei){
+        (t_vector2i){minx, miny},
+        (t_vector2i){maxx, maxy}
+    });
 }

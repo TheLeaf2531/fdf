@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 18:52:22 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/22 16:40:50 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/29 15:42:29 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void		gen_triangles(t_model **model, int **tab)
 		if (x + 1 != (*model)->width && y + 1 != (*model)->height)
 		{
 			(*model)->triangle[i].p0 = vec3_set(x, y, tab[y][x]);
-			(*model)->triangle[i].p1 = vec3_set(x + 1, y, tab[y][x + 1]);
-			(*model)->triangle[i++].p2 = vec3_set(x, y + 1, tab[y + 1][x]);
+			(*model)->triangle[i].p2 = vec3_set(x + 1, y, tab[y][x + 1]);
+			(*model)->triangle[i++].p1 = vec3_set(x, y + 1, tab[y + 1][x]);
 		}
 		if (x != 0 && y + 1 != (*model)->height)
 		{
-			(*model)->triangle[i].p0 = vec3_set(x, y, tab[y][x]);
+			(*model)->triangle[i].p2 = vec3_set(x, y, tab[y][x]);
 			(*model)->triangle[i].p1 = vec3_set(x, y + 1, tab[y + 1][x]);
-			(*model)->triangle[i++].p2 = vec3_set(x - 1, y + 1,
+			(*model)->triangle[i++].p0 = vec3_set(x - 1, y + 1,
 													tab[y + 1][x - 1]);
 		}
 		y = x == (*model)->width - 1 ? y + 1 : y;

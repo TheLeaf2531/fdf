@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 17:53:22 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/26 17:34:42 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/27 17:44:13 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ t_matrix4   cam_invert(t_camera *camera)
         {(double)0.0, (double)0.0, (double)1.0, (double)0.0},
         {-camera->position.x, -camera->position.y, -camera->position.z,
         (double)1.0}}};
-    return (m4_multiply(rot_inv, pos_inv));
+    return (m4_multiply(pos_inv, rot_inv));
 }

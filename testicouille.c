@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:26:38 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/26 19:33:06 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/29 15:51:30 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,45 +25,71 @@ int		kkey_hook(int keycode, void *param)
 {
 	t_scene		*scene;
 	t_vector3	vec;
+	t_vector3	pos;
 
 	//printf("%d\n", keycode);
 	scene = param;
-	vec = scene->camera->rotation;	
+	vec = scene->camera->rotation;
+	pos = scene->camera->position;	
+	if (keycode == 123)
+	{
+		pos.x -= 2;
+		cam_set_position(&scene->camera, pos);
+		fdf_draw_scene(scene);
+	}
+	if (keycode == 124)
+	{
+		pos.x += 2;
+		cam_set_position(&scene->camera, pos);
+		fdf_draw_scene(scene);
+	}
+	if (keycode == 126)
+	{
+		pos.y += 2;
+		cam_set_position(&scene->camera, pos);
+		fdf_draw_scene(scene);
+	}
+	if (keycode == 125)
+	{
+		pos.y -= 2;
+		cam_set_position(&scene->camera, pos);
+		fdf_draw_scene(scene);
+	}
 	if (keycode == 91)
 	{
-		vec.y += 1;
+		vec.y += 10;
 		cam_set_rotation(&scene->camera, vec);
 
 	fdf_draw_scene(scene);
 	}
 	if (keycode == 84)
 	{
-		vec.y = vec.y == 0 ? vec.y : vec.y - 1;
+		vec.y = vec.y - 10 < 0 ? 360 - -(vec.y - 10) : vec.y - 10;
 		cam_set_rotation(&scene->camera, vec);	
 
 	fdf_draw_scene(scene);
 	}
 	if (keycode == 89)
 	{
-		vec.x += 1;
+		vec.x += 10;
 		cam_set_rotation(&scene->camera, vec);
 	fdf_draw_scene(scene);
 	}
 	if (keycode == 83)
 	{
-		vec.x = vec.x == 0 ? vec.x : vec.x - 1;
+		vec.x = vec.x - 10 < 0 ? 360 - -(vec.x - 10) : vec.x - 10;
 		cam_set_rotation(&scene->camera, vec);	
 	fdf_draw_scene(scene);
 	}
 	if (keycode == 92)
 	{
-		vec.z += 1;
+		vec.z += 10;
 		cam_set_rotation(&scene->camera, vec);
 	fdf_draw_scene(scene);
 	}
 	if (keycode == 85)
 	{
-		vec.z = vec.z == 0 ? vec.z : vec.z - 1;
+		vec.z = vec.z - 10 < 0 ? 360 - -(vec.z - 10) : vec.z - 10;
 		cam_set_rotation(&scene->camera, vec);	
 	fdf_draw_scene(scene);
 	}

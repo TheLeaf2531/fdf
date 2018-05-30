@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_create_cam.c                                   :+:      :+:    :+:   */
+/*   fdf_free_image.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 18:13:33 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/29 15:34:56 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/27 17:23:15 by vboissel          #+#    #+#             */
+/*   Updated: 2018/05/27 17:26:44 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_camera	*fdf_create_camera()
+void        fdf_free_image(t_image **img)
 {
-	t_camera	*camera;
-
-	if ((camera = ft_memalloc(sizeof(t_camera))) == NULL)
-		return (NULL);
-	camera->position = vec3_set(0, 0, 0);
-	camera->rotation = vec3_set(0, 0, 0);
-	camera->cam_ratio = WIDTH / HEIGHT;
-	return (camera); 
+    ft_memdel((void**)&(*img)->img_ptr);
+    ft_memdel((void**)&(*img)->img);
+    ft_memdel((void**)img);
 }

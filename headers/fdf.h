@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 19:28:39 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/26 18:51:20 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/27 17:26:56 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void			cam_set_rotation(t_camera **cam, t_vector3 rot);
 t_camera		*fdf_create_camera();
 t_matrix4   	cam_invert(t_camera *camera);
 int				fdf_draw_scene(t_scene *sc);
+void        	fdf_free_image(t_image **img);
 
 #endif

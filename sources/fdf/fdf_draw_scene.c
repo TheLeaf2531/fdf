@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 19:10:48 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/26 19:34:24 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/27 17:32:14 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,18 @@ int				fdf_draw_scene(t_scene *sc)
 	fdf_fill_image(sc->image, to_color(255,255,255,0));
 	while (i < sc->model->tris)
 	{
-		printf("%zu\n", i);
 		p0 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p0);
 		p1 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p1);
 		p2 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p2);
-		printf("coords ok\n");
 		if (!is_out_of_bound(p0, p1))
 			fdf_draw_line(sc->image, p0, p1, to_color(0,0,0,0));
-		printf("l0 ok\n");
 		if (!is_out_of_bound(p1, p2))
 			fdf_draw_line(sc->image, p1, p2, to_color(0,0,0,0));
-		printf("l1 ok\n");
 		if (!is_out_of_bound(p2, p0))
 			fdf_draw_line(sc->image, p2, p0, to_color(0,0,0,0));
-		printf("l2 ok\n");
 		i++;
 	}
 	mlx_put_image_to_window(sc->window->mlx_ptr, sc->window->win_ptr, sc->image->img_ptr, 0, 0);
+	fdf_free_image(&sc->image);
 	return (0);
 }

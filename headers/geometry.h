@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:13:30 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/24 16:53:32 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/05/27 20:44:26 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef struct	s_matrix4
 	double t[4][4];
 }				t_matrix4;
 
+typedef struct	s_rectanglei
+{
+	t_vector2i	max;
+	t_vector2i	min;
+}				t_rectanglei;
+
 void			m4_printl(t_matrix4 m);
 void			v3_printl(t_vector3 v);
 
@@ -81,6 +87,8 @@ t_vector3		m4_multiply_v3(t_matrix4 m, t_vector3 v);
 t_matrix4		m4_euler(t_vector3 rot);
 t_matrix4		m4_translation(t_vector3 pos);
 t_matrix4		m4_invert_translation(t_vector3 pos);
+
+t_rectanglei	reci_set(int minx, int miny, int maxx, int maxy);
 
 double			to_radians(double ang);
 double			to_degrees(double ang);
