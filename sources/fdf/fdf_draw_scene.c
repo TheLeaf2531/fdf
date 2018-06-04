@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 19:10:48 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/27 17:32:14 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:58:21 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static int			is_out_of_bound(t_vector2l p0, t_vector2l p1)
 
 	p0_out = 0;
 	p1_out = 0;
-	if ((p0.x <= 0 || p0.y <= 0) || (p0.x > WIDTH || p0.y > HEIGHT))
+	if ((p0.x < 0 || p0.y < 0) || (p0.x > WIDTH || p0.y > HEIGHT))
 		p0_out = 1;
-	if ((p1.x <= 0 || p1.y <= 0) || (p1.x > WIDTH || p1.y > HEIGHT))
+	if ((p1.x < 0 || p1.y < 0) || (p1.x > WIDTH || p1.y > HEIGHT))
 		p1_out = 1;
 	return ((p0_out && p1_out));
 }
@@ -64,6 +64,8 @@ int				fdf_draw_scene(t_scene *sc)
 	t_vector2l	p2;
 	
 	inv = cam_invert(sc->camera);
+
+	inv = cam_invert(sc->camera);
 	i = 0;
 	if ((sc->image = fdf_create_image(sc->window)) == NULL)
 		return (-1);
@@ -73,6 +75,10 @@ int				fdf_draw_scene(t_scene *sc)
 		p0 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p0);
 		p1 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p1);
 		p2 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p2);
+		//vec2l_print(p0);
+		//vec2l_print(p1);
+		//vec2l_print(p2);
+		
 		if (!is_out_of_bound(p0, p1))
 			fdf_draw_line(sc->image, p0, p1, to_color(0,0,0,0));
 		if (!is_out_of_bound(p1, p2))

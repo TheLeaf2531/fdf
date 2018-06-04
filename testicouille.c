@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:26:38 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/29 15:51:30 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:51:55 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,36 @@ int		key_hook(int keycode, void *param)
 	return (1);
 }
 
+int	expose_hook(void *param)
+{
+	t_scene		*scene;
+
+	scene = param;
+	fdf_draw_scene(scene);
+	return (1);
+}
+
 int		kkey_hook(int keycode, void *param)
 {
 	t_scene		*scene;
 	t_vector3	vec;
 	t_vector3	pos;
 
-	//printf("%d\n", keycode);
 	scene = param;
 	vec = scene->camera->rotation;
-	pos = scene->camera->position;	
+	pos = scene->camera->position;
+	if (keycode == 116)
+	{
+		pos.z += 2;
+		cam_set_position(&scene->camera, pos);
+		fdf_draw_scene(scene);
+	}
+	if (keycode == 121)
+	{
+		pos.z -= 2;
+		cam_set_position(&scene->camera, pos);
+		fdf_draw_scene(scene);
+	}
 	if (keycode == 123)
 	{
 		pos.x -= 2;
@@ -104,8 +124,10 @@ int		main(int argc, char **argv)
 		return (0);
 	if ((scene = fdf_create_scene(WIDTH, HEIGHT, argv[1])) == NULL)
 		return (-1);
+	printf("kay\n");
 	fdf_draw_scene(scene);
 	mlx_key_hook(scene->window->win_ptr, &kkey_hook, scene);
+	mlx_expose_hook(scene->window->win_ptr, &expose_hook, scene);
 	mlx_loop(scene->window->mlx_ptr);
 	return (0);
 	
