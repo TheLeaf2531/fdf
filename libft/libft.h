@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 18:15:17 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/20 16:50:43 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/12 14:57:26 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ size_t			ft_strsplitcnt(char const *s, char c);
 char			*ft_strncatf(char *s1, char*s2);
 int				ft_fchar(char c, char *str);
 int				get_next_line(const int fd, char **line);
-int				*ft_strsplitint(char *str, int c);
+int				*ft_strsplitint(char *str, int c, size_t *size);
 void			ft_lstaddend(t_list **alst, t_list *new);
 
 #endif

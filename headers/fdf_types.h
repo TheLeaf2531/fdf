@@ -6,14 +6,14 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 17:51:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/26 17:54:02 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:29:47 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_TYPES
-# define FDF_TYPES
+#ifndef FDF_TYPES_H
+# define FDF_TYPES_H
 
-#include "geometry.h"
+# include "geometry.h"
 
 typedef	struct	s_triangle
 {
@@ -63,5 +63,22 @@ typedef struct	s_scene
 	t_model		*model;
 	t_image		*image;
 }				t_scene;
+
+typedef enum	e_keys
+{
+	esc = 53,
+	xr_add = 89,
+	xr_sub = 83,
+	yr_add = 91,
+	yr_sub = 84,
+	zr_add = 92,
+	zr_sub = 85,
+	xp_add = 123,
+	xp_sub = 124,
+	yp_add = 125,
+	yp_sub = 126,
+	zp_add = 121,
+	zp_sub = 116
+}				t_key;
 
 #endif

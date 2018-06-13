@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 19:10:48 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/04 18:58:21 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:28:21 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void	vec2l_print(t_vector2l v)
 {
 	printf("%d, %d\n", v.x, v.y);
+}
+
+void	vec2_print(t_vector2 v)
+{
+	printf("%f, %f\n", v.x, v.y);
 }
 
 void	print_triangle(t_triangle t)
@@ -31,13 +36,18 @@ static t_vector2l	compute_coordinate(t_camera *camera, t_matrix4 cam_inv, t_vect
 	t_vector2	p_NDC;
 
 	p_camera = m4_multiply_v3(cam_inv, p);
-	ps.x = p_camera.x / -p_camera.z;
-	ps.y = p_camera.y / -p_camera.z;
+	ps.x = p_camera.x / (-p_camera.z);
+	ps.y = p_camera.y / (-p_camera.z);
 	p_NDC.x = (ps.x + 2 * 0.5) / 2;
 	p_NDC.y = (ps.y + 2 * 0.5) / 2;
+	if (p_camera.z < 0)
+	{
+		p_NDC.x = -1;
+		p_NDC.y = -1;
+	}
 	return ((t_vector2l){
-		(long)(p_NDC.x * WIDTH),
-		(long)((1 - p_NDC.y) * HEIGHT)
+		floorl(p_NDC.x * WIDTH),
+		floorl((1 - p_NDC.y) * HEIGHT)
 	});
 }
 
@@ -62,8 +72,6 @@ int				fdf_draw_scene(t_scene *sc)
 	t_vector2l	p0;
 	t_vector2l	p1;
 	t_vector2l	p2;
-	
-	inv = cam_invert(sc->camera);
 
 	inv = cam_invert(sc->camera);
 	i = 0;
@@ -72,22 +80,24 @@ int				fdf_draw_scene(t_scene *sc)
 	fdf_fill_image(sc->image, to_color(255,255,255,0));
 	while (i < sc->model->tris)
 	{
+		//printf("\ns%zu ", i);
+		//print_triangle(sc->model->triangle[i]);
 		p0 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p0);
 		p1 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p1);
 		p2 = compute_coordinate(sc->camera, inv, sc->model->triangle[i].p2);
-		//vec2l_print(p0);
-		//vec2l_print(p1);
-		//vec2l_print(p2);
-		
+		//printf("l0 ");
 		if (!is_out_of_bound(p0, p1))
 			fdf_draw_line(sc->image, p0, p1, to_color(0,0,0,0));
+		//printf("l1 ");
 		if (!is_out_of_bound(p1, p2))
 			fdf_draw_line(sc->image, p1, p2, to_color(0,0,0,0));
+		//printf("l2 ");
 		if (!is_out_of_bound(p2, p0))
 			fdf_draw_line(sc->image, p2, p0, to_color(0,0,0,0));
+		//printf("e%zu\n", i);
 		i++;
 	}
 	mlx_put_image_to_window(sc->window->mlx_ptr, sc->window->win_ptr, sc->image->img_ptr, 0, 0);
-	fdf_free_image(&sc->image);
+	mlx_destroy_image(sc->window->mlx_ptr, sc->image);
 	return (0);
 }

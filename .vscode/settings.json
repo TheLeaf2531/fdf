@@ -1,8 +1,5 @@
 {
 	"C_Cpp.intelliSenseEngineFallback": "Disabled",
-	"files.associations": {
-		"matrix4x4.h": "c",
-		"geometry.h": "c",
-		"parser.h": "c"
-	}
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false
 }
