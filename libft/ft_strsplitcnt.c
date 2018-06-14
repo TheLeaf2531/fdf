@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:33:28 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/14 17:18:31 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/14 20:29:25 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 size_t		ft_strsplitcnt(char const *s, char c)
 {
-	size_t	words;
-	size_t	i;
-
-	if (s == NULL || !c)
-		return (0);
-	i = 0;
-	words = 0;
-	while (i < ft_strlen(s))
+    size_t  n;
+	
+	n = 0;
+	while (*s)
 	{
-		words = (s[i] != c && (s[i - 1] == c || !i)) ? words + 1 : words;
-		i++;
+		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
+			n++;
+		s++;
 	}
-	return (words);
+	return (n);
 }
+
+

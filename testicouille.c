@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:26:38 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/12 18:57:55 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/14 18:53:31 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,5 @@ int		main(int argc, char **argv)
 	mlx_expose_hook(scene->window->win_ptr, &expose_hook, scene);
 	mlx_loop(scene->window->mlx_ptr);
 	*/
-	while (1)
-		;
 	return (0);
 }
