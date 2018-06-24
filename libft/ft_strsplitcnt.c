@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:33:28 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/14 20:29:25 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/24 16:29:04 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t		ft_strsplitcnt(char const *s, char c)
 {
-    size_t  n;
-	
+	size_t	n;
+
 	n = 0;
 	while (*s)
 	{
@@ -25,5 +25,3 @@ size_t		ft_strsplitcnt(char const *s, char c)
 	}
 	return (n);
 }
-
-
