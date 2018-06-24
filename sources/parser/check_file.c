@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terrain.h                                          :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 17:01:47 by vboissel          #+#    #+#             */
-/*   Updated: 2018/04/18 19:50:01 by vboissel         ###   ########.fr       */
+/*   Created: 2018/06/24 15:48:34 by vboissel          #+#    #+#             */
+/*   Updated: 2018/06/24 15:56:20 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERRAIN_H
-# define TERRAIN_H
+#include "parser.h"
 
-# include "triangle.h"
-
-typedef struct	s_terrain
+int		check_line(char *str)
 {
-	int			width;
-	int			height;
-	t_triangle	**triangles;
-	size_t		size;
-}				t_terrain;
+	size_t i;
 
-t_terrain *create_terrain(int width, int height);
-
-#endif
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && !ft_isspace(str[i]) && !ft_issign(str[i]))
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}

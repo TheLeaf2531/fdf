@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector2.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/12 18:33:20 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/17 17:02:19 by vboissel         ###   ########.fr       */
+/*   Created: 2018/05/15 17:26:38 by vboissel          #+#    #+#             */
+/*   Updated: 2018/06/23 20:19:52 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR2_H
-# define VECTOR2_H
+#include "fdf.h"
 
-#include "libft/libft.h"
-
-typedef	struct	s_vector2
+int		main(int argc, char **argv)
 {
-	int		x;
-	int		y;
-}				t_vector2;
+	t_scene *scene;
 
-t_vector2		*new_vector2(int x, int y);
-
-#endif
+	if (argc != 2)
+		return (0);
+	if ((scene = fdf_create_scene(WIDTH, HEIGHT, argv[1])) == NULL)
+		return (-1);
+	fdf_set_loop(scene);
+	return (0);
+}

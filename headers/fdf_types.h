@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 17:51:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/06 15:29:47 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/22 16:26:30 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef	struct	s_model
 	size_t		width;
 	size_t		height;
 	size_t		tris;
-	t_triangle	*triangle;
+	double		depht;
+	t_triangle	**triangle;
 }				t_model;
 
 typedef struct	s_scene

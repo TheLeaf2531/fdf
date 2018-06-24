@@ -6,7 +6,7 @@
 #    By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:11:05 by vboissel          #+#    #+#              #
-#    Updated: 2018/04/16 01:38:56 by vboissel         ###   ########.fr        #
+#    Updated: 2018/06/24 16:25:49 by vboissel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,17 @@ NAME = fdf
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 FLAGSMLIB = -lmlx -framework OpenGL -framework AppKit
-LIBFT_DIR = libft/
-LIBFT = libft/libft.h libft/libft.a
-SRC = $(wildcard *.c)
+LIBFT_DIR = ./libft/
+LIBFT = ./libft/libft.a
+SRC = $(wildcard ./sources/fdf/*.c) $(wildcard ./sources/parser/*.c) $(wildcard ./sources/geometry/*.c)
+INC = ./headers/
 INC_MLX = /usr/local/include
 
 all : $(NAME)
 
 $(NAME): $(SRC) $(INC)
 	@$(MAKE) -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) -I $(INC_MLX) $(LIBFT) $(SRC) $(INC) $(FLAGSMLIB)
+	$(CC) $(CFLAGS) $(FLAGSMLIB) -I $(INC) -I $(LIBFT_DIR) $(LIBFT) $(SRC)  
 	@mv a.out $(NAME)
 
 clean :

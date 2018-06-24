@@ -6,13 +6,26 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:30:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/07 15:58:09 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/24 15:58:09 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void fdf_bresenham(t_image *img, t_vector2l strt,
+unsigned int		to_color(unsigned int r, unsigned int g,
+	unsigned int b, unsigned int a)
+{
+	unsigned int argb;
+
+	argb = (
+		(((a > 0xff) ? 0xff : a) << 24) |
+		(((r > 0xff) ? 0xff : r) << 16) |
+		(((g > 0xff) ? 0xff : g) << 8) |
+		(((b > 0xff) ? 0xff : b)));
+	return (argb);
+}
+
+static void			fdf_bresenham(t_image *img, t_vector2l strt,
 			t_vector2l end, unsigned int color)
 {
 	t_vector2l	s;
@@ -37,11 +50,11 @@ static void fdf_bresenham(t_image *img, t_vector2l strt,
 	}
 }
 
-static void fdf_vertical(t_image *img, t_vector2l strt,
+static void			fdf_vertical(t_image *img, t_vector2l strt,
 	t_vector2l end, unsigned int color)
 {
 	t_vector2l swp;
-	
+
 	if (strt.y > end.y)
 	{
 		swp = strt;
@@ -56,7 +69,7 @@ static void fdf_vertical(t_image *img, t_vector2l strt,
 	}
 }
 
-static void fdf_horizontal(t_image *img, t_vector2l strt,
+static void			fdf_horizontal(t_image *img, t_vector2l strt,
 	t_vector2l end, unsigned int color)
 {
 	t_vector2l swp;
@@ -73,11 +86,9 @@ static void fdf_horizontal(t_image *img, t_vector2l strt,
 			fdf_put_pixel(img, color, strt.x, strt.y);
 		strt.x += 1;
 	}
-
 }
 
-
-void	fdf_draw_line(t_image *img, t_vector2l strt,
+void				fdf_draw_line(t_image *img, t_vector2l strt,
 						t_vector2l end, unsigned int color)
 {
 	if ((strt.x != end.x) && (strt.y != end.y))
