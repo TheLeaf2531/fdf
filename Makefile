@@ -6,7 +6,7 @@
 #    By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:11:05 by vboissel          #+#    #+#              #
-#    Updated: 2018/06/24 16:25:49 by vboissel         ###   ########.fr        #
+#    Updated: 2018/06/24 19:03:24 by vboissel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ all : $(NAME)
 
 $(NAME): $(SRC) $(INC)
 	@$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(FLAGSMLIB) -I $(INC) -I $(LIBFT_DIR) $(LIBFT) $(SRC)  
+	@$(CC) $(CFLAGS) $(FLAGSMLIB) -I $(INC) -I $(LIBFT_DIR) $(LIBFT) $(SRC)  
 	@mv a.out $(NAME)
 
 clean :
@@ -32,7 +32,7 @@ clean :
 
 fclean : clean
 	@(cd $(LIBFT_DIR) && $(MAKE) $@)
-	@rm $(NAME)
+	@rm -f $(NAME)
 
 re : fclean all
 
