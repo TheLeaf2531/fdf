@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:30:56 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/24 15:58:09 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:24:08 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ static void			fdf_horizontal(t_image *img, t_vector2l strt,
 void				fdf_draw_line(t_image *img, t_vector2l strt,
 						t_vector2l end, unsigned int color)
 {
-	if ((strt.x != end.x) && (strt.y != end.y))
-		fdf_bresenham(img, strt, end, color);
 	if (strt.x == end.x)
 		fdf_vertical(img, strt, end, color);
 	if (strt.y == end.y)
 		fdf_horizontal(img, strt, end, color);
+	if ((strt.x != end.x) && (strt.y != end.y))
+		fdf_bresenham(img, strt, end, color);
 }

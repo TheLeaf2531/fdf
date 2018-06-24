@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 19:10:48 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/23 20:10:43 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:37:18 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static t_vector3	compute_point(t_matrix4 cam_inv, t_vector3 p)
 	ps.y = p_camera.y / (-p_camera.z);
 	p_cp.x = (ps.x + 2 * 0.5) / 2;
 	p_cp.y = (ps.y + 2 * 0.5) / 2;
-	p_cp.x *= WIDTH;
-	p_cp.y = (1 - p_cp.y) * HEIGHT;
+	p_cp.x = nearbyint(p_cp.x * WIDTH);
+	p_cp.y = nearbyint((1 - p_cp.y) * HEIGHT);
 	p_cp.z = p_camera.z;
 	p_cp.w = ((p_cp.x <= 0 || p_cp.x >= WIDTH) ||
 				(p_cp.y <= 0 || p_cp.y >= WIDTH) ||
@@ -65,15 +65,15 @@ static void			draw_tri(t_matrix4 cam_inv, t_image *img, t_triangle t)
 	if (triangle.p0.w || triangle.p1.w)
 		fdf_draw_line(img, (t_vector2l){triangle.p0.x, triangle.p0.y},
 							(t_vector2l){triangle.p1.x, triangle.p1.y},
-							to_color(0, 0, 0, 0));
+							to_color(255, 255, 255, 0));
 	if (triangle.p1.w || triangle.p2.w)
 		fdf_draw_line(img, (t_vector2l){triangle.p1.x, triangle.p1.y},
 							(t_vector2l){triangle.p2.x, triangle.p2.y},
-							to_color(0, 0, 0, 0));
+							to_color(255, 255, 255, 0));
 	if (triangle.p2.w || triangle.p0.w)
 		fdf_draw_line(img, (t_vector2l){triangle.p2.x, triangle.p2.y},
 							(t_vector2l){triangle.p0.x, triangle.p0.y},
-							to_color(0, 0, 0, 0));
+							to_color(255, 255, 255, 0));
 }
 
 int					fdf_draw_scene(t_scene *sc)

@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:13:30 by vboissel          #+#    #+#             */
-/*   Updated: 2018/05/27 20:44:26 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:31:29 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GEOMETRY_H
 
 # include <math.h>
-# include <stdio.h>
 
 # define PI	3.14159265359
 
@@ -32,16 +31,16 @@ typedef	struct	s_vector2l
 
 typedef	struct	s_vector2
 {
-	double		x;
-	double		y;
+	long double		x;
+	long double		y;
 }				t_vector2;
 
 typedef struct	s_vector3
 {
-	double x;
-	double y;
-	double z;
-	double w;
+	long double x;
+	long double y;
+	long double z;
+	long double w;
 }				t_vector3;
 
 typedef struct	s_matrix3
@@ -51,7 +50,7 @@ typedef struct	s_matrix3
 
 typedef struct	s_matrix4
 {
-	double t[4][4];
+	long double t[4][4];
 }				t_matrix4;
 
 typedef struct	s_rectanglei
@@ -59,9 +58,6 @@ typedef struct	s_rectanglei
 	t_vector2i	max;
 	t_vector2i	min;
 }				t_rectanglei;
-
-void			m4_printl(t_matrix4 m);
-void			v3_printl(t_vector3 v);
 
 t_vector2		vec2_set(double x, double y);
 t_vector2i		vec2i_set(int x, int y);

@@ -6,7 +6,7 @@
 /*   By: vboissel <vboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:28:28 by vboissel          #+#    #+#             */
-/*   Updated: 2018/06/24 15:58:31 by vboissel         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:09:46 by vboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_image			*fdf_create_image(t_window *window)
 			&image->size_line,
 			&image->endian)))
 		return (NULL);
-	fdf_fill_image(image, to_color(255, 255, 255, 0));
+	fdf_fill_image(image, to_color(0, 0, 0, 0));
 	return (image);
 }
 
